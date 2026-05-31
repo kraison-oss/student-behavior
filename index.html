@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ระบบบันทึกคะแนนพฤติกรรมนักเรียน - โรงเรียนโชคชัยสามัคคี</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ระบบพฤติกรรม">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        :root {
+            --primary-purple: #6a1b9a;
+            --dark-purple: #4a148c;
+            --exit-red: #f44336;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 25px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            text-align: center;
+            width: 90%;
+            max-width: 420px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-box {
+            margin-bottom: 25px;
+        }
+
+        .logo-box img {
+            width: 140px;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(106, 27, 154, 0.2));
+        }
+
+        .title-main {
+            color: var(--dark-purple);
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+        }
+
+        .title-school {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .info-sub {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .author-tag {
+            font-size: 13px;
+            color: #999;
+            margin: 25px 0;
+            font-weight: 300;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-login {
+            background-color: var(--primary-purple);
+            color: white;
+            box-shadow: 0 8px 20px rgba(106, 27, 154, 0.3);
+        }
+
+        .btn-login:hover, .btn-login:active {
+            background-color: var(--dark-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(106, 27, 154, 0.4);
+        }
+
+        .btn-exit {
+            background-color: #fff;
+            color: var(--exit-red);
+            border: 2px solid var(--exit-red);
+        }
+
+        .btn-exit:hover, .btn-exit:active {
+            background-color: var(--exit-red);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* รองรับหน้าจอ iPad แนวตั้ง */
+        @media (min-width: 768px) {
+            .card { padding: 50px 40px; }
+            .title-main { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="logo-box">
+            <img src="icon-192.png" alt="School Logo">
+        </div>
+
+        <h1 class="title-main">ระบบบันทึกคะแนนพฤติกรรมนักเรียน</h1>
+        <div class="title-school">โรงเรียนโชคชัยสามัคคี</div>
+        
+        <p class="info-sub">สังกัดสำนักงานเขตพื้นที่การศึกษามัธยมศึกษานครราชสีมา</p>
+        <p class="info-sub">กระทรวงศึกษาธิการ</p>
+
+        <div class="author-tag">By @ wownaruk : 0854793190</div>
+
+        <div class="btn-container">
+            <a href="https://script.google.com/macros/s/AKfycbzZcff46Ti3bDInlfSwMIEiuVVq2m7iGuD9qzmJ8jdpKCBEr3Cgn9tQOG1mB9iRyV1n/exec" 
+               class="btn btn-login">
+               เข้าสู่ระบบ
+            </a>
+            
+            <button onclick="confirmExit()" class="btn btn-exit">
+                ออกจากโปรแกรม
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function confirmExit() {
+            if (confirm("คุณต้องการปิดระบบใช่หรือไม่?")) {
+                window.close();
+                // Fallback สำหรับเบราว์เซอร์ทั่วไป
+                setTimeout(() => {
+                    window.location.href = "about:blank";
+                }, 300);
+            }
+        }
+
+        // ป้องกันการลากหน้าจอบน iOS
+        document.addEventListener('touchmove', function(e) {
+            if (e.scale !== 1) { e.preventDefault(); }
+        }, { passive: false });
+    </script>
+</body>
+</html>
